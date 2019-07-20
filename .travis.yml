@@ -1,0 +1,36 @@
+dist: xenial
+language: python
+python:
+  - "3.6"
+  - "3.7"
+
+install:
+  - pip install pipenv
+  - pipenv install --dev
+  - pipenv install --dev codecov --skip-lock
+
+script:
+  - pipenv run pytest -v --cov=library_template/ --cov-report=
+  - flake8
+  - mypy ./library_template
+
+after_success:
+  - codecov
+  - sphinx-apidoc -f -o docs/source/apis library_template
+  - cd docs
+  - make html
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  keep-history: false
+  on:
+    branch: master
+  github-token: $GITHUB_TOKEN
+  local-dir: docs/build/html
+  committer-from-gh: true
+
+# This variable is generated and added by travis cli
+env:
+  global:
+    secure: ENCRYPT_GITHUB_TOKEN
