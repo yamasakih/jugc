@@ -2,12 +2,12 @@ import pkg_resources
 
 import pytest
 
-import library_template
+import jugc
 
 
 def test_version() -> None:
-    expect = pkg_resources.get_distribution('library_template').version
-    actual = library_template.__version__
+    expect = pkg_resources.get_distribution('jugc').version
+    actual = jugc.__version__
     assert expect == actual
 
 

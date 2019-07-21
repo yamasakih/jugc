@@ -10,13 +10,13 @@ install:
   - pipenv install --dev codecov --skip-lock
 
 script:
-  - pipenv run pytest -v --cov=library_template/ --cov-report=
+  - pipenv run pytest -v --cov=jugc/ --cov-report=
   - flake8
-  - mypy ./library_template
+  - mypy ./jugc
 
 after_success:
   - codecov
-  - sphinx-apidoc -f -o docs/source/apis library_template
+  - sphinx-apidoc -f -o docs/source/apis jugc
   - cd docs
   - make html
 
