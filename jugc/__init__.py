@@ -11,8 +11,7 @@ __all__ = [
 ]
 
 
-def calculate_descriptors(mol: Mol, names: Any = None,
-                          ipc_avg: bool = True) -> pd.DataFrame:
+def calculate_descriptors(mol: Mol, names: Any = None, ipc_avg: bool = True):
     if names is None:
         names = [d[0] for d in Descriptors._descList]
     calc = MoleculeDescriptors.MolecularDescriptorCalculator(names)

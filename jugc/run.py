@@ -1,10 +1,12 @@
-import subprocess
+from subprocess import Popen
+from subprocess import STDOUT
 import tempfile
 
-n_cpus: int = 2
+n_cpus: int = 4
 with tempfile.TemporaryDirectory() as temp_dir:
-    command = ['jug', 'execute', '_jugc.py', '--jugdir', f'{temp_dir}']
-    print(command)
+    command = [
+        'jug', 'execute', 'subprocess.py', '--will-cite', '--verbose=INFO',
+        '--jugdir', temp_dir
+    ]
     for _ in range(n_cpus):
-        # subprocess.call(command)
-        subprocess.Popen(command)
+        Popen(command, stderr=STDOUT)
