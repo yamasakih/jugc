@@ -1,6 +1,5 @@
 import os
 from typing import List
-from typing import Union
 
 from jug import bvalue
 from jug import TaskGenerator
@@ -18,5 +17,5 @@ supp = Chem.SDMolSupplier(input_file)
 mols: List[Mol] = [mol for mol in supp]
 descs = [calculate_descriptors(mol) for mol in mols]
 
-descs = pd.concat(bvalue(descs))
-descs.to_csv('descs.csv', index=False)
+df: pd.DataFrame = pd.concat(bvalue(descs))
+df.to_csv('descs.csv', index=False)

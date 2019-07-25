@@ -5,12 +5,21 @@ python:
   - "3.7"
 
 install:
-  - pip install pipenv
-  - pipenv install --dev
-  - pipenv install --dev codecov --skip-lock
+  - sudo apt-get update
+  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda info -a
+  - conda create -q -n dev -c rdkit python=$TRAVIS_PYTHON_VERSION rdkit flake8 mypy pytest
+  - source activate dev
+  - conda install -c conda-forge jug codecov pytest-cov
+  - pip install -e .
 
 script:
-  - pipenv run pytest -v --cov=jugc/ --cov-report=
+  - pytest -v --cov=jugc/ --cov-report=
   - flake8
   - mypy ./jugc
 
