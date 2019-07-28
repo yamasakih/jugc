@@ -1,4 +1,5 @@
-from typing import Any
+from typing import List
+from typing import Optional
 
 import numpy as np
 import pandas as pd
@@ -13,7 +14,8 @@ __all__ = [
 ]
 
 
-def calculate_descriptors(mol: Mol, names: Any = None,
+def calculate_descriptors(mol: Mol,
+                          names: Optional[List[str]] = None,
                           ipc_avg: bool = True) -> pd.DataFrame:
     """
     Calculate the descriptors for input molecule. If Mol is None, all NaN
