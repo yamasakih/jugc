@@ -36,9 +36,11 @@ if [ ! "$N_JOBS" ]; then
     usage_exit
 fi
 
-rm ./.jug*
+JUGDIR=`mktemp -d ./jugdata.XXXXXX`
 for i in $(seq 1 ${N_JOBS})
 do
-    jug execute ./jugc/subprocess.py -- -i ${INPUT} -o ${OUTPUT} > ./.jug$i.out 2> ./.jug$i.err &
+    jug execute --will-cite --jugdir ${JUGDIR} ./jugc/subprocess.py \
+        -- -i ${INPUT} -o ${OUTPUT} > ${JUGDIR}/.jug$i.out \
+        2> ${JUGDIR}/.jug$i.err &
 done
 wait
