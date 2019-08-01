@@ -104,3 +104,6 @@ venv.bak/
 
 # VSCode
 .vscode/*
+
+# test data directory
+data/*
