@@ -7,7 +7,7 @@ import pandas as pd
 from rdkit import Chem
 from rdkit.Chem.rdchem import Mol
 
-from jugc import calculate_descriptors
+from jugclib import calculate_descriptors
 
 parser: argparse.ArgumentParser = argparse.ArgumentParser(
     description='Calculate descriptors.')

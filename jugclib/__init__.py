@@ -7,7 +7,7 @@ from rdkit.Chem import Descriptors
 from rdkit.Chem.rdchem import Mol
 from rdkit.ML.Descriptors import MoleculeDescriptors
 
-__version__ = '0.1.0'
+__version__ = '0.1.0b0'
 
 __all__ = [
     'calculate_descriptors',

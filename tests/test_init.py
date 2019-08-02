@@ -5,13 +5,13 @@ import pandas as pd
 import pytest
 from rdkit.Chem import MolFromSmiles
 
-import jugc
-from jugc import calculate_descriptors
+import jugclib
+from jugclib import calculate_descriptors
 
 
 def test_version() -> None:
     expect = pkg_resources.get_distribution('jugc').version
-    actual = jugc.__version__
+    actual = jugclib.__version__
     assert expect == actual
 
 

@@ -39,7 +39,7 @@ fi
 JUGDIR=`mktemp -d ./jugdata.XXXXXX`
 for i in $(seq 1 ${N_JOBS})
 do
-    jug execute --will-cite --jugdir ${JUGDIR} ./jugc/subprocess.py \
+    jug execute --will-cite --jugdir ${JUGDIR} ~/anaconda3/envs/dev_jugc/bin/jugc_subprocess.py \
         -- -i ${INPUT} -o ${OUTPUT} > ${JUGDIR}/.jug$i.out \
         2> ${JUGDIR}/.jug$i.err &
 done
