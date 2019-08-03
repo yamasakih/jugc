@@ -7,7 +7,7 @@ import pandas as pd
 from rdkit import Chem
 from rdkit.Chem.rdchem import Mol
 
-from jugc import calculate_descriptors
+from jugclib import calculate_descriptors
 
 parser: argparse.ArgumentParser = argparse.ArgumentParser(
     description='Calculate descriptors.')
@@ -17,16 +17,23 @@ parser.add_argument('-o',
                     required=True,
                     type=str,
                     help='Output csv')
-args = parser.parse_args()
 
-calculate_descriptors = TaskGenerator(calculate_descriptors)
 
-input_file = args.input
-output_file = args.output
+def main() -> None:
+    args = parser.parse_args()
 
-supp = Chem.SDMolSupplier(input_file)
-mols: List[Mol] = [mol for mol in supp]
-tasks = [calculate_descriptors(mol) for mol in mols]
+    calculate_descriptors = TaskGenerator(calculate_descriptors)
 
-descs: pd.DataFrame = pd.concat(bvalue(tasks))
-descs.to_csv(output_file, index=False)
+    input_file = args.input
+    output_file = args.output
+
+    supp = Chem.SDMolSupplier(input_file)
+    mols: List[Mol] = [mol for mol in supp]
+    tasks = [calculate_descriptors(mol) for mol in mols]
+
+    descs: pd.DataFrame = pd.concat(bvalue(tasks))
+    descs.to_csv(output_file, index=False)
+
+
+if __name__ == '__main__':
+    main()
